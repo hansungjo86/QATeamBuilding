@@ -15,12 +15,12 @@ qm_agent_package/
 ├── PROJECT_INSTRUCTIONS.md            # Claude.ai Projects > MMORPG QA에 붙여넣을 프로젝트 지침
 ├── INSTALL.md                         # Claude Code에 설치하는 방법
 ├── agents/                            # ~/.claude/agents/ 에 복사
-│   ├── qm-team-v1.md                    # 오케스트레이터 — 전체 QM 활동 조율
+│   ├── qm-team-v1.md                  # 오케스트레이터 — 전체 QM 활동 조율
 │   ├── qm-doc-governor.md             # 우선순위 1: 규약·표준 문서 거버넌스
 │   ├── qm-kpi-tracker.md              # 우선순위 2 + 5: 품질 KPI 추적 + 효율성 측정
 │   ├── qm-capa-tracker.md             # 우선순위 3: 회고 → 시정·예방 액션 추적
 │   ├── qm-process-auditor.md          # 우선순위 4: QA 프로세스 준수 감사
-│   └── qm-exec-reporter.md            # 우선순위 6: 외부 부서·경영진 보고
+│   └── qm-exec-reporter.md            # 우선순위 6: 주간 / 월간 / 분기 통합 리포터
 └── skills/                            # ~/.claude/skills/ 에 복사
     ├── qm-doc-governance/SKILL.md
     ├── qm-KPI/SKILL.md
@@ -28,6 +28,21 @@ qm_agent_package/
     ├── qm-audit/SKILL.md
     └── qm-mgmt-review/SKILL.md
 ```
+
+## 에이전트 / 모델 / 핵심 역할
+
+| # | 에이전트 | 모델 | 핵심 역할 | 자연어 트리거 | 짝 스킬 | ISO 9001:2015 |
+|---|---------|------|----------|--------------|---------|--------------|
+| 1 | qm-team-v1 | sonnet | 오케스트레이터 — 사용자 요청을 해석해 하위 5개 에이전트에 위임 | "QM 보고서", "이번 분기 QM 활동" | (디스패처) | 전체 — QMS 운영 |
+| 2 | qm-doc-governor | **opus** ⭐ | 표준 문서들의 용어/버전/상호참조/표준성 일관성 검증, 변경 영향 분석 | 문서 개정, "용어 통일", 신규 표준 도입 | qm-doc-governance | 7.5 Documented Information |
+| 3 | qm-kpi-tracker | sonnet | Google Sheets TC 결과 + Jira 데이터 → PASS율, 회귀율, 자동화 ROI, 효율성 지표 계산 | "주간/월간 KPI", "TC 결과" | qm-KPI | 9.1.3 Performance Evaluation |
+| 4 | qm-capa-tracker | sonnet | 회고록 분석 → 시정조치(CA) / 예방조치(PA) 분리 도출, 다음 회고에서 추적 | "회고", "액션 아이템", "시정조치" | qm-CAPA | 10.2 Nonconformity & Corrective Action |
+| 5 | qm-process-auditor | **opus** ⭐ | 사용자 GitHub 표준 vs 실제 Jira/Confluence/Sheets 활동 비교 감사, 부적합 Finding 작성 | 분기 감사, 부적합 발견, 신규 프로세스 도입 후 | qm-audit | 9.2 Internal Audit |
+| 6 | qm-exec-reporter | **opus** ⭐ | (A) 주간 QA 업무보고 Confluence 작성·업로드, (B) 월간 KPI/CAPA 종합, (C) 분기 경영진/외부 부서 보고 | "주간보고", "월간 리포트", "경영진 보고" | qm-mgmt-review | 9.3 Management Review |
+
+⭐ = 외부 공개 / 표준 판정 / 부적합 판정 카테고리 — 항상 최신 Opus 모델 적용. 모델 업그레이드 시 작업 시작 전 사용자에게 안내. 자세한 정책은 각 에이전트 본문의 "모델 정책" 섹션 참조.
+
+> Claude.ai Projects 환경에서는 슬래시 명령어(`/qm-kpi`, `/qm-retro`, `/qm-audit`, `/qm-doc`, `/qm-report`)로도 호출 가능. 자세한 내용은 슬래시 명령어 패키지의 `PROJECTS_ADDENDUM.md` 참조.
 
 ## 두 가지 사용처
 
