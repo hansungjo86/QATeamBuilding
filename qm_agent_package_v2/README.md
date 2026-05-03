@@ -1,6 +1,10 @@
-# QM Agent for MMORPG QA — 패키지 안내
+에# QM Agent for MMORPG QA — 패키지 안내
 
-> **목적**: 사용자가 운영 중인 [TC Team v2 멀티 에이전트 파이프라인](https://github.com/nobles92ts-ship-it/AI_GAME_QA_TestCase)과 호환되며, 사용자의 [QA 팀 업무 프로세스](https://github.com/hansungjo86/QATeamBuilding/blob/main/QA_%ED%8C%80_%EC%97%85%EB%AC%B4_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4.md)를 표준 기준으로 사용하는 **MMORPG QA 프로젝트용 QM(Quality Management) 에이전트 패키지**.
+**Version: v2.1.0** ([CHANGELOG](./CHANGELOG.md) 참조)
+
+> **목적**: **현재 개발 중인 MMORPG 게임의 품질 관리(QM, Quality Management)**. 사용자의 [QA 팀 업무 프로세스](https://github.com/hansungjo86/QATeamBuilding/blob/main/QA_%ED%8C%80_%EC%97%85%EB%AC%B4_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4.md)를 표준 기준으로, ISO 9001:2015를 표준으로 운영.
+>
+> **옵션 통합 (의존성 없음)**: 본 패키지는 **TC Team v2 없이도 독립 동작**합니다. 사용자가 [TC Team v2 멀티 에이전트 파이프라인](https://github.com/nobles92ts-ship-it/AI_GAME_QA_TestCase) 또는 다른 TC 자동 생성 도구를 함께 운영 중이라면, 그 산출물(TC 결과, 대시보드, Jira 흐름)을 KPI 측정·감사·보고의 입력으로 활용할 수 있습니다. 데이터 입력 형식만 맞으면 어떤 도구라도 무방합니다.
 >
 > **운영 환경**: 2인 QA 파트 (팀장 = QM 역할 겸임 / 팀원 = LLM R&D)
 > **기준 표준**: ISO 9001:2015 (Quality Management Systems)
@@ -59,26 +63,28 @@ qm_agent_package/
 
 `agents/`와 `skills/` 디렉터리를 본인의 `~/.claude/agents/`와 `~/.claude/skills/`에 복사하세요. (자세한 방법은 `INSTALL.md` 참고)
 
-→ TC Team v2와 동일한 인프라에서 동작합니다.
+→ Claude Code 환경에서 동작합니다 (TC Team v2와 같은 인프라를 공유 가능, 그러나 독립 운영도 무방).
 → 자연어 명령으로 다단계 QM 워크플로우 실행이 가능합니다.
 
-## TC Team v2와의 관계
+## TC 자동 생성 도구와의 관계 (옵션)
 
-이 QM 에이전트는 **TC Team v2를 대체하지 않고, 그 위에서 활용·감사·개선합니다**.
+이 QM 에이전트는 **TC를 직접 생성하지 않습니다.** TC 작성은 별도 도구의 영역이며, 본 패키지는 그 결과물을 한 단계 위에서 분석·평가·보고합니다.
+
+사용자가 TC 자동 생성 도구(예: TC Team v2)를 운영 중이라면 다음과 같이 통합할 수 있습니다.
 
 ```
-TC Team v2 (QA 실무 파이프라인)
+[옵션] TC 자동 생성 도구 (예: TC Team v2)
 └── 출력물: Google Sheets TC, 대시보드, TC 결과
                     │
                     ▼
-QM 에이전트 (이 패키지)
+QM 에이전트 (본 패키지) — 도구 종류와 무관하게 데이터 형식만 맞으면 동작
 └── 입력물로 활용:
     ├── KPI 계산 (qm-kpi-tracker)
     ├── 프로세스 준수 감사 (qm-process-auditor)
     └── 경영진 보고 (qm-exec-reporter)
 ```
 
-QM 에이전트는 **TC 자동 생성 작업에 개입하지 않습니다.** TC Team v2가 만들어낸 결과물을 한 단계 위에서 분석·평가·보고합니다.
+TC 자동 생성 도구가 없어도 본 패키지는 동작합니다. 사용자가 수동으로 데이터를 제공하거나, Jira/Confluence 같은 일반 도구의 데이터만으로도 KPI/감사/보고를 수행할 수 있습니다.
 
 ## 4가지 작성 지침 준수
 

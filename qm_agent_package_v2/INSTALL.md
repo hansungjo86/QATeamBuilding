@@ -50,13 +50,19 @@ https://claude.ai 접속 → 로그인.
 
 ## 방법 B. Claude Code (자동화·다단계 작업용)
 
-TC Team v2와 동일한 인프라에 설치합니다.
+Claude Code 환경에 설치합니다. TC Team v2와 같은 인프라를 공유할 수 있지만 **TC Team v2 설치는 사전 요구 사항이 아닙니다** (본 패키지는 독립 동작).
 
-### 사전 요구 사항
+### 사전 요구 사항 (필수)
 
 - Claude Code 설치 완료 (https://claude.com/claude-code)
-- Node.js v18+ (TC Team v2가 이미 설치되어 있다면 충족됨)
+- Node.js v18+
 - `~/.claude/agents/`, `~/.claude/skills/` 디렉터리 존재
+
+### 선택적 통합점 (있으면 더 풍부, 없어도 무방)
+
+- **TC 자동 생성 도구** (예: TC Team v2): KPI 계산·감사·보고에 그 산출물을 활용 가능
+- **MCP 서버**: `google-sheets`(KPI 데이터 자동 수집), `claude_ai_Atlassian`(Jira/Confluence 직접 조회)
+  - 미설치 시 사용자가 데이터를 복사해서 제공하면 됨
 
 ### Step 1. 패키지 다운로드 / 복사
 
@@ -111,13 +117,15 @@ qm-audit/
 qm-mgmt-review/
 ```
 
-### Step 4. (이미 TC Team v2 설치됨이라면) MCP 설정 확인
+### Step 4. (선택) MCP 설정 확인
 
-TC Team v2가 이미 설치되어 있다면 MCP 설정은 이미 완료되어 있습니다. 같은 Google Sheets / Atlassian MCP를 본 QM 에이전트도 활용합니다.
+본 패키지는 MCP 없이도 동작합니다. 다만 다음 MCP 서버가 등록되어 있으면 데이터 자동 수집이 가능해 작업이 간편해집니다.
 
-`~/.claude/.mcp.json` 파일이 존재하고 다음 서버가 등록되어 있는지 확인:
-- `google-sheets`
-- (선택) `atlassian` (Confluence·Jira 접근용)
+`~/.claude/.mcp.json` 파일에 다음 서버가 등록되어 있는지 확인:
+- `google-sheets` — Google Sheets TC 결과 자동 조회
+- `claude_ai_Atlassian` — Jira/Confluence 직접 조회 (qm-exec-reporter의 주간보고 워크플로우에 사용됨)
+
+이미 TC Team v2를 설치한 사용자는 위 MCP가 보통 등록되어 있어 추가 설정 없이 본 패키지를 활용 가능합니다.
 
 ### Step 5. 사용 시작
 
@@ -181,7 +189,7 @@ A. Skills 디렉터리가 정확히 `~/.claude/skills/qm-XXX/SKILL.md` 형식인
 
 ### Q3. Google Sheets / Jira에 접근 못 함 (Claude Code)
 
-A. TC Team v2가 사용하는 MCP 설정이 정상인지 확인하세요. `~/.claude/.mcp.json`의 google-sheets 서버 설정을 점검합니다.
+A. MCP 서버 설정을 확인하세요. `~/.claude/.mcp.json`의 `google-sheets` / `claude_ai_Atlassian` 서버가 등록되고 인증된 상태인지 점검. TC Team v2를 사용 중이라면 같은 MCP를 공유하므로 추가 설정 불필요.
 
 ### Q4. 한국어 인코딩 문제 (Windows)
 
