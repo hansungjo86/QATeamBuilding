@@ -1,6 +1,6 @@
 에# QM Agent for MMORPG QA — 패키지 안내
 
-**Version: v2.1.0** ([CHANGELOG](./CHANGELOG.md) 참조)
+**Version: v2.1.2** ([CHANGELOG](./CHANGELOG.md) 참조)
 
 > **목적**: **현재 개발 중인 MMORPG 게임의 품질 관리(QM, Quality Management)**. 사용자의 [QA 팀 업무 프로세스](https://github.com/hansungjo86/QATeamBuilding/blob/main/QA_%ED%8C%80_%EC%97%85%EB%AC%B4_%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4.md)를 표준 기준으로, ISO 9001:2015를 표준으로 운영.
 >
